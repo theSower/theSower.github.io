@@ -309,7 +309,7 @@ ps: bought at 1 and sell at 6.
 <p>Also, this problem is similar to “the maximum-subarray problem” in “introduction to algorithm”. (Chp1.4 Divide and Conquer).</p>
 <p>First, we use the method in Divide and Conquer, which makes a time compexity of O(nlogn). We will analysis the recurrences time compexity with master method.</p>
 <h3 id="A-Solution-of-divide-and-conquer"><a href="#A-Solution-of-divide-and-conquer" class="headerlink" title="A Solution of divide-and-conquer"></a>A Solution of divide-and-conquer</h3><p>In this method, first, we reprocess the original array of daily price into an array of the change of daily price.</p>
-<p><img src="/content/images/images/maximum_subArr.png" alt="Alt Image Text"></p>
+<p><img src="../content/images/images/maximum_subArr.png" alt="Alt Image Text"></p>
 <p>Divide-and-conquer suggests that we divide the subarray into two subarrays of as equal size as possible. That is, we find the midpoint, say mid, of the subarray, and consider the subarrays changes[low,…,mid], changes[mid+1,…,high].</p>
 <p>Then the max profit can be found in exactly one of the following places:</p>
 <ul>
