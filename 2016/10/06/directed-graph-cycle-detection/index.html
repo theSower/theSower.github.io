@@ -92,7 +92,7 @@ Some courses may have prerequisites, for example to take course 0 you have to fi
 <meta property="og:site_name" content="the Sower">
 <meta property="og:description" content="Problem Description:There are a total of n courses you have to take, labeled from 0 to n - 1.
 Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which i">
-<meta property="og:updated_time" content="2016-10-06T08:00:14.000Z">
+<meta property="og:updated_time" content="2016-10-06T08:04:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cycle Detection in a Directed Graph">
 <meta name="twitter:description" content="Problem Description:There are a total of n courses you have to take, labeled from 0 to n - 1.
@@ -177,7 +177,7 @@ Some courses may have prerequisites, for example to take course 0 you have to fi
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -187,7 +187,7 @@ Some courses may have prerequisites, for example to take course 0 you have to fi
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -250,7 +250,7 @@ Some courses may have prerequisites, for example to take course 0 you have to fi
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-10-06T00:00:00-07:00" content="2016-10-06">
               2016-10-06
             </time>
@@ -262,7 +262,7 @@ Some courses may have prerequisites, for example to take course 0 you have to fi
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">in</span>
+              <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Algorithm/" itemprop="url" rel="index">
@@ -308,7 +308,7 @@ Input: 2, [[1,0],[0,1]]
 Output: false
 </code></pre><p>This is a problem from <a href="https://leetcode.com/problems/course-schedule/" target="_blank" rel="external">leetcode 207</a></p>
 <p>This problem is detecting cycles in a directed graph. Now we will use two methods to solve the problem.</p>
-<h3 id="A-Solution-using-DFS"><a href="#A-Solution-using-DFS" class="headerlink" title="A Solution using DFS"></a>A Solution using DFS</h3><p>In this method, we modify the recursion DFS algorithm.</p>
+<h3 id="A-Solution-Using-DFS"><a href="#A-Solution-Using-DFS" class="headerlink" title="A Solution Using DFS"></a>A Solution Using DFS</h3><p>In this method, we modify the recursion DFS algorithm.</p>
 <p>Considering the vector in our DFS tree, we can divide them into 2 categories</p>
 <ul>
 <li>The vectors have not been touched.</li>
@@ -318,7 +318,7 @@ Output: false
 <p>In the following Java implementation, we use two arrays to flag the status of vectors.</p>
 <p>Following is a java implementation.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public boolean checkCycle(ArrayList&lt;Integer&gt;[] courses, int current, boolean[] visited, boolean[] recursionStack) &#123;</div><div class="line">        if (!visited[current]) &#123;</div><div class="line">            visited[current] = true;</div><div class="line">            recursionStack[current] = true;</div><div class="line">            ArrayList&lt;Integer&gt; children = courses[current];</div><div class="line">            for (Integer child : children) &#123;</div><div class="line">                if (recursionStack[child]) return true;</div><div class="line">                else if (!visited[child] &amp;&amp; checkCycle(courses, child, visited, recursionStack)) return true;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        recursionStack[current] = false;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public boolean canFinish(int numCourses, int[][] prerequisites) &#123;</div><div class="line">        // Add Edges</div><div class="line">        ArrayList&lt;Integer&gt;[] courses = (ArrayList&lt;Integer&gt;[])new ArrayList[numCourses];</div><div class="line">        for (int i = 0; i &lt; courses.length; i++) &#123;</div><div class="line">            courses[i] = new ArrayList&lt;Integer&gt;();</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; prerequisites.length; i++) &#123;</div><div class="line">            int[] edge = prerequisites[i];</div><div class="line">            courses[edge[0]].add(edge[1]);</div><div class="line">        &#125;</div><div class="line">        // Intialize visited and recursionStack</div><div class="line">        boolean[] visited = new boolean[numCourses];</div><div class="line">        boolean[] recursionStack= new boolean[numCourses];</div><div class="line">        for (int i = 0; i &lt; numCourses; i++) &#123;</div><div class="line">            visited[i] = false;</div><div class="line">            recursionStack[i] = false;</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; numCourses; i++) &#123;</div><div class="line">            if (checkCycle(courses, i, visited, recursionStack)) return false;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="A-Solution-using-topological-order"><a href="#A-Solution-using-topological-order" class="headerlink" title="A Solution using topological order"></a>A Solution using topological order</h3><p>If we can not sort all the nodes in the graph in a topological order, then there exist a cycle.<br>Thus, we can use topological sorting algorithm to slove this problem.</p>
+<h3 id="A-Solution-Using-Topological-Order"><a href="#A-Solution-Using-Topological-Order" class="headerlink" title="A Solution Using Topological Order"></a>A Solution Using Topological Order</h3><p>If we can not sort all the nodes in the graph in a topological order, then there exist a cycle.<br>Thus, we can use topological sorting algorithm to slove this problem.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public boolean canFinish(int numCourses, int[][] prerequisites) &#123;</div><div class="line">        int[] degree = new int[numCourses];</div><div class="line">        // Add Edges</div><div class="line">        ArrayList&lt;Integer&gt;[] courses = (ArrayList&lt;Integer&gt;[])new ArrayList[numCourses];</div><div class="line">        for (int i = 0; i &lt; courses.length; i++) &#123;</div><div class="line">            courses[i] = new ArrayList&lt;Integer&gt;();</div><div class="line">            degree[i] = 0;</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; prerequisites.length; i++) &#123;</div><div class="line">            int[] edge = prerequisites[i];</div><div class="line">            courses[edge[0]].add(edge[1]);</div><div class="line">            ++degree[edge[1]];</div><div class="line">        &#125;</div><div class="line">        int ordered = 0;</div><div class="line">        Deque&lt;Integer&gt; stack = new ArrayDeque&lt;Integer&gt;();</div><div class="line">        for (int i = 0; i &lt; numCourses; i++) &#123;</div><div class="line">            if (degree[i] == 0) &#123;</div><div class="line">                stack.push(i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        while(stack.size() &gt; 0) &#123;</div><div class="line">            int check = stack.pop();</div><div class="line">            ++ordered;</div><div class="line">            for (Integer child: courses[check]) &#123;</div><div class="line">                if (--degree[child] == 0) &#123;</div><div class="line">                    stack.push(child);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return (ordered == numCourses) ? true: false;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Both methods are linear time complexity.</p>
 <p>Here is a video to explain these two methods.</p>
@@ -414,10 +414,10 @@ Output: false
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -434,7 +434,7 @@ Output: false
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -442,7 +442,7 @@ Output: false
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">categories</span>
               
             </div>
           
@@ -451,7 +451,7 @@ Output: false
             <div class="site-state-item site-state-tags">
               <a href="/tags">
                 <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -479,7 +479,7 @@ Output: false
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Solution-using-DFS"><span class="nav-number">1.1.</span> <span class="nav-text">A Solution using DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Solution-using-topological-order"><span class="nav-number">1.2.</span> <span class="nav-text">A Solution using topological order</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Solution-Using-DFS"><span class="nav-number">1.1.</span> <span class="nav-text">A Solution Using DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Solution-Using-Topological-Order"><span class="nav-number">1.2.</span> <span class="nav-text">A Solution Using Topological Order</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -506,7 +506,7 @@ Output: false
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
